@@ -13,31 +13,27 @@ public class Main{
         long p = 0;
         for(int i=1; i<=n; i++){
             int h = Integer.parseInt(br.readLine());
-            boolean isDup = false;
-            while(!stack.isEmpty() && stack.peek()[0]<=h){
-                if(h == stack.peek()[0] && stack.size()>1){
+            int sameHeightCount = 1;
+
+            while(!stack.isEmpty() && stack.peek()[0]<h){
+                p += stack.pop()[1];
+            }
+
+            if(!stack.isEmpty() && stack.peek()[0] == h){
+                int[] top = stack.pop();
+                
+                sameHeightCount += top[1];
+                p += top[1];
+
+                if(!stack.isEmpty()){
                     p++;
-                    p+= (stack.peek()[1]++);
-                    isDup = true;
-                    break;
-                }
-                else if(h == stack.peek()[0] && stack.size()==1){
-                    p+= (stack.peek()[1]++);
-                    isDup = true;
-                    break;
-                }
-                else{
-                    p+=stack.pop()[1];
-                    isDup=false;
                 }
             }
-            if(!isDup && !stack.isEmpty()){
+            else if(!stack.isEmpty() && stack.peek()[0]>h){
                 p++;
-                stack.push(new int[]{h,1});
             }
-            else if(!isDup){
-                stack.push(new int[]{h,1});
-            }
+
+            stack.push(new int[]{h,sameHeightCount});
         }
 
         System.out.println(p);
