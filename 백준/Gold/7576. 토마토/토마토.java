@@ -1,6 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -11,8 +11,8 @@ public class Main{
         int m = Integer.parseInt(st.nextToken());
         int n = Integer.parseInt(st.nextToken());
         int[][] arr = new int[n][m];
-        boolean[][] visited = new boolean[n][m];
-        Queue<int[]> q = new LinkedList<>();
+        Queue<int[]> q = new ArrayDeque<>();
+
         Integer zeroC =0 ;
 
         for(int i=0; i<n; i++){
@@ -28,19 +28,18 @@ public class Main{
                 }
             }
         }
-        System.out.println(bfs(arr,q,n,m,visited,zeroC));
+        System.out.println(bfs(arr,q,n,m,zeroC));
         
         
     }
 
-    public static int bfs(int[][] arr, Queue<int[]> q, int n,int m,boolean[][] visited,Integer zeroC){
+    public static int bfs(int[][] arr, Queue<int[]> q, int n,int m,Integer zeroC){
         
         int day = 0;
         int[] dx = new int[]{1,0,-1,0};
         int[] dy = new int[]{0,1,0,-1};
         
         while(!q.isEmpty()){
-            Queue<int[]> newQ = new LinkedList<>();
             if(zeroC==0)break;
             int size = q.size();
             for(int i=0; i<size; i++){
@@ -51,15 +50,13 @@ public class Main{
                 for(int j=0; j<4; j++){
                     int nx = curX+dx[j];
                     int ny = curY+dy[j];
-                    if(nx>=0 && nx<m && ny >=0 && ny <n && arr[ny][nx]==0 && !visited[ny][nx]){
+                    if(nx>=0 && nx<m && ny >=0 && ny <n && arr[ny][nx]==0 ){
                         arr[ny][nx] = 1;
-                        visited[ny][nx]= true;
-                        newQ.add(new int[]{nx,ny});
+                        q.add(new int[]{nx,ny});
                         zeroC--;
                     }
                 }
             }
-            q = newQ;
             day++;
         }
 
