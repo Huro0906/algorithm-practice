@@ -1,6 +1,6 @@
 # [level 3] 숫자 야구 - 451808 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/451808) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/451808?language=java) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 11월 17일 18:53:34
+2025년 11월 17일 18:54:21
 
 ### 문제 설명
 
